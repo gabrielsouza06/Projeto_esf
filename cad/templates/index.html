@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+th,
+td {
+    padding: 0.5rem;
+    vertical-align: top;
+    border: 1px solid #dee2e6;
+}
+
+th {
+    style table headers 
+    font-weight: bold;
+    text-align: left;
+}
+
+tbody {
+    style table body 
+}
+
+tr {
+    style table rows 
+    add hover effect for zebra striping 
+    &:nth-child(even) {
+    background-color: #f8f9fa;
+}
+}
+</style>
+<body>
+    <h1>Listagem de Pessoa</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Sobrenome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for pessoa in pessoas %}
+            <tr>
+                <th scope="row">{{ pessoa.id }}</th>
+                <td>{{ pessoa.nome }}</td>
+                <td>{{ pessoa.sobrenome }}</td>
+                <td>{{ pessoa.email }}</td>
+                <td><a href="{% url 'editar' pessoa.id %}"><button>Editar</button></a></td>
+                <td><a href="{% url 'delete' pessoa.id %}"><button>delete</button></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

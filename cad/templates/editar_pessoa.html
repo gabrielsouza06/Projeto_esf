@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Editar Pessoa</title>
+</head>
+<body>
+<h1>Editar Pessoa</h1>
+
+    <form action="{% url 'update' pessoa.id %}" method="POST">{% csrf_token %}  
+        <label for="nome" >Nome:</label><br>
+        <input type="text" name="nome" value="{{ pessoa.nome }}">
+        <br><br>
+        <label for="sobrenome">Sobrenome:</label><br>
+        <input type="text" name="sobrenome" value="{{ pessoa.sobrenome }}">
+        <br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" name="email" value="{{ pessoa.email }}">
+        <br><br>
+        <button type="submit">update</button>
+    </form>
+</body>
+</html>
