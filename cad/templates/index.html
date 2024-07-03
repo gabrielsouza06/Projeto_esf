@@ -38,7 +38,8 @@ tr {
 }
 </style>
 <body>
-    <h1>Listagem de Pessoa</h1>
+    <h1>Listagem de Profissional</h1>
+    <h3>Retornar para o <a href="{% url 'pagina1' %}">home</a></h3>    <br>
     <table class="table">
         <thead>
         <tr>
@@ -63,6 +64,24 @@ tr {
             {% endfor %}
         </tbody>
     </table>
+
+    <h1>Cadastrar Profissional</h1>
+    <form action="{% url 'salvar' %}" method="POST">{% csrf_token %}  
+        <label for="nome">Nome:</label><br>
+        <input type="text" name="nome">
+        <br><br>
+        <label for="sobrenome">Sobrenome:</label><br>
+        <input type="text" name="sobrenome">
+        <br><br>
+        <label for="senha">Senha:</label><br>
+        <input type="password" name="senha">
+        <br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" name="email">
+        <br><br>
+        <button type="submit">salvar</button>
+    </form>
+
 
 </body>
 </html>
