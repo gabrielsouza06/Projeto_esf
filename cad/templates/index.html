@@ -1,46 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href={% static "vendor/fontawesome-free/css/all.min.css"%} rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link href={% static "css/sb-admin-2.min.css"%} rel="stylesheet">
 </head>
-<style>
-    table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 1rem;
-}
-
-th,
-td {
-    padding: 0.5rem;
-    vertical-align: top;
-    border: 1px solid #dee2e6;
-}
-
-th {
-    style table headers 
-    font-weight: bold;
-    text-align: left;
-}
-
-tbody {
-    style table body 
-}
-
-tr {
-    style table rows 
-    add hover effect for zebra striping 
-    &:nth-child(even) {
-    background-color: #f8f9fa;
-}
-}
-</style>
 <body>
     <h1>Listagem de Profissional</h1>
     <h3>Retornar para o <a href="{% url 'pagina1' %}">home</a></h3>    <br>
-    <table class="table">
+    <table class="table table-success table-striped">
         <thead>
         <tr>
             <th scope="col">id</th>
@@ -58,8 +32,8 @@ tr {
                 <td>{{ pessoa.nome }}</td>
                 <td>{{ pessoa.sobrenome }}</td>
                 <td>{{ pessoa.email }}</td>
-                <td><a href="{% url 'editar' pessoa.id %}"><button>Editar</button></a></td>
-                <td><a href="{% url 'delete' pessoa.id %}"><button>delete</button></a></td>
+                <td><a href="{% url 'editar' pessoa.id %}"><button  type="button" class="btn btn-secondary">Editar</button></a></td>
+                <td><a href="{% url 'delete' pessoa.id %}"><button type="button" class="btn btn-danger">delete</button></a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -79,8 +53,9 @@ tr {
         <label for="email">Email:</label><br>
         <input type="email" name="email">
         <br><br>
-        <button type="submit">salvar</button>
+        <button type="submit" type="button" class="btn btn-success">salvar</button>
     </form>
+
 
 
 </body>
