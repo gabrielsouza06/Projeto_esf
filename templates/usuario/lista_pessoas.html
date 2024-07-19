@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+<h3>Aqui lista!</h3>
+<input type="submit" value="Voutar para home" onclick="location.href = '{% url 'login:home' %}'">
+<input type="submit" value="Criar uma nova Pessoa" onclick="location.href = '{% url 'usuarios:nova_pessoa' %}'">
+<br><br>
+<ul>
+    {% for pessoa in object_list %}
+    <li>{{ pessoa.nome_completo }} - {{ pessoa.nome_pai }}  
+    {% if pessoa.pk %}
+            <a href="{% url 'usuarios:editar_pessoa' pk=pessoa.pk %}">Editar</a>
+            <a href="{% url 'usuarios:excluir_pessoa' pk=pessoa.pk %}">Visualizar</a>
+            <a href="{% url 'usuarios:detalhes_pessoa' pk=pessoa.pk %}">Deletar</a>
+    {% else %}
+        <span>Pessoa sem ID válido</span>
+    {% endif %}
+    </li>
+{% endfor %}
+
+</ul>
+
+{% endblock %}

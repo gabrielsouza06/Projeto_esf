@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+
+
+{% block content %}
+<h1>Detalhes da Pessoa</h1>
+
+    <p><strong>Nome Completo:</strong> {{ pessoa.nome_completo }}</p>
+    <p><strong>Rua:</strong> {{ pessoa.rua }}</p>
+    <p><strong>Bairro:</strong> {{ pessoa.bairro }}</p>
+    <p><strong>Número:</strong> {{ pessoa.numero }}</p>
+    <p><strong>Cidade:</strong> {{ pessoa.cidade }}</p>
+    <p><strong>UF:</strong> {{ pessoa.uf }}</p>
+    <p><strong>CPF:</strong> {{ pessoa.cpf }}</p>
+    <p><strong>RG:</strong> {{ pessoa.rg }}</p>
+    <p><strong>Nome da Mãe:</strong> {{ pessoa.nome_mae }}</p>
+    <p><strong>Nome do Pai:</strong> {{ pessoa.nome_pai }}</p>
+    <br><br>
+    <input type="submit" value="Voutar para a lista" onclick="location.href = '{% url 'usuarios:lista_pessoas' %}'">
+{% endblock %}

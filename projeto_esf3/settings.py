@@ -38,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "consulta",
     "estoque",
     "estabelecimento",
-    "usuario"
+    "usuario",
+    "login",
+
 ]
 
 MIDDLEWARE = [
@@ -130,6 +131,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGOUT_REDIRECT_URL = 'pagina1'
-LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'consulta:lista_consulta'
+LOGIN_REDIRECT_URL = 'login:home'
 

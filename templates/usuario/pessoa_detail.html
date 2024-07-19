@@ -1,0 +1,10 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<h1>Tem certeza que deseja apagar a pessoa '{{ object.nome_completo }}'?</h1>
+<form action="{% url 'usuarios:excluir_pessoa' pk=object.pk %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Sim, tenho certeza">
+    <input type="button" value="Cancelar" onclick="location.href = '{% url 'usuarios:lista_pessoas' %}'">
+</form>
+{% endblock %}
