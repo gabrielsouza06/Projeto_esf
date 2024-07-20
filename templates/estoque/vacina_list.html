@@ -1,0 +1,35 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Lista de Vacinas</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vacina in vacinas %}
+            <tr>
+                <td>{{ vacina.nome }}</td>
+                <td>{{ vacina.descricao }}</td>
+                <td>{{ vacina.quantidade }}</td>
+                <td>
+                    <a href="{% url 'vacina_update' vacina.pk %}" class="btn btn-primary btn-sm">Editar</a>
+                    
+                    <a href="{% url 'ajustar_quantidade_vacina' vacina.pk %}" class="btn btn-primary btn-sm">Ajustar Quantidade</a>
+                    <a href="{% url 'vacina_delete' vacina.pk %}" class="btn btn-danger btn-sm">Deletar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-success" href="{% url 'login:user_page' %}">Voltar para a Página de Usuário</a>
+    <br><br>
+    <a href="{% url 'vacina_create' %}" class="btn btn-success">Adicionar Vacina</a>
+</div>
+{% endblock %}

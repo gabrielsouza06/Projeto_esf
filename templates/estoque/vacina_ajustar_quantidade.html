@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<h2>Ajustar Quantidade de Vacina</h2>
+<p>Vacina: {{ vacina.nome }}</p>
+<p>Quantidade Atual: {{ vacina.quantidade }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Ajustar Quantidade</button>
+    <a href="{% url 'vacina_list' %}">Cancelar</a>
+</form>
+{% endblock %}
