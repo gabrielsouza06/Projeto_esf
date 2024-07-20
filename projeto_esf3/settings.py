@@ -131,6 +131,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGOUT_REDIRECT_URL = 'consulta:lista_consulta'
-LOGIN_REDIRECT_URL = 'login:home'
+LOGOUT_REDIRECT_URL = 'login:home'
+LOGIN_REDIRECT_URL = 'login:user_page'
 
