@@ -9,6 +9,6 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Ajustar Quantidade</button>
-    <a href="{% url 'vacina_list' %}">Cancelar</a>
+    <a href="{% url 'estoque:vacina_list' %}">Cancelar</a>
 </form>
 {% endblock %}

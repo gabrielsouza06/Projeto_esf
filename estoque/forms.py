@@ -1,5 +1,5 @@
 from django import forms
-from .models import Vacina, Remedio
+from .models import Vacina, Remedio, Reserva
 
 class VacinaForm(forms.ModelForm):
     class Meta:
@@ -12,8 +12,6 @@ class RemedioForm(forms.ModelForm):
         fields = ['nome', 'descricao', 'quantidade']
 
 
-from django import forms
-
 class AjustarQuantidadeForm(forms.Form):
     OPCAO_AJUSTE = [
         ('+', 'Adicionar'),
@@ -21,4 +19,10 @@ class AjustarQuantidadeForm(forms.Form):
     ]
     ajuste = forms.ChoiceField(choices=OPCAO_AJUSTE, label='Operação')
     quantidade = forms.IntegerField(min_value=1, label='Quantidade')
+
+class ReservaForm(forms.ModelForm):
+    class Meta:
+        model = Reserva
+        fields = ['remedio', 'nome_pessoa', 'quantidade']
+
 

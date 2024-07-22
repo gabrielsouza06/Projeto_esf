@@ -1,0 +1,11 @@
+<!-- estoque/reservar_remedio.html -->
+{% extends '_base.html' %}
+
+{% block content %}
+<h2>Reservar Remédio</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Reservar</button>
+</form>
+{% endblock %}

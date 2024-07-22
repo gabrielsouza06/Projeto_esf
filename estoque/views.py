@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Vacina, Remedio
-from .forms import VacinaForm, RemedioForm, AjustarQuantidadeForm
+from .forms import VacinaForm, RemedioForm, AjustarQuantidadeForm, ReservaForm
 
 def vacina_list(request):
     vacinas = Vacina.objects.all()
@@ -15,7 +15,7 @@ def vacina_create(request):
         form = VacinaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('vacina_list')
+            return redirect('estoque:vacina_list')
     else:
         form = VacinaForm()
     return render(request, 'estoque/vacina_form.html', {'form': form})
@@ -25,7 +25,7 @@ def remedio_create(request):
         form = RemedioForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('remedio_list')
+            return redirect('estoque:remedio_list')
     else:
         form = RemedioForm()
     return render(request, 'estoque/remedio_form.html', {'form': form})
@@ -36,7 +36,7 @@ def vacina_update(request, pk):
         form = VacinaForm(request.POST, instance=vacina)
         if form.is_valid():
             form.save()
-            return redirect('vacina_list')
+            return redirect('estoque:vacina_list')
     else:
         form = VacinaForm(instance=vacina)
     return render(request, 'estoque/vacina_form.html', {'form': form})
@@ -47,7 +47,7 @@ def remedio_update(request, pk):
         form = RemedioForm(request.POST, instance=remedio)
         if form.is_valid():
             form.save()
-            return redirect('remedio_list')
+            return redirect('estoque:remedio_list')
     else:
         form = RemedioForm(instance=remedio)
     return render(request, 'estoque/remedio_form.html', {'form': form})
@@ -56,14 +56,14 @@ def vacina_delete(request, pk):
     vacina = get_object_or_404(Vacina, pk=pk)
     if request.method == 'POST':
         vacina.delete()
-        return redirect('vacina_list')
+        return redirect('estoque:vacina_list')
     return render(request, 'estoque/vacina_confirm_delete.html', {'vacina': vacina})
 
 def remedio_delete(request, pk):
     remedio = get_object_or_404(Remedio, pk=pk)
     if request.method == 'POST':
         remedio.delete()
-        return redirect('remedio_list')
+        return redirect('estoque:remedio_list')
     return render(request, 'estoque/remedio_confirm_delete.html', {'remedio': remedio})
 
 def ajustar_quantidade(request, pk):
@@ -83,7 +83,7 @@ def ajustar_quantidade(request, pk):
                 form.add_error('quantidade', 'Quantidade a subtrair é maior que a quantidade disponível.')
 
             remedio.save()
-            return redirect('remedio_list')
+            return redirect('estoque:remedio_list')
     else:
         form = AjustarQuantidadeForm()
     
@@ -106,8 +106,29 @@ def ajustar_quantidade_vacina(request, pk):
                 form.add_error('quantidade', 'Quantidade a subtrair é maior que a quantidade disponível.')
 
             vacina.save()
-            return redirect('vacina_list')
+            return redirect('estoque:vacina_list')
     else:
         form = AjustarQuantidadeForm()
     
     return render(request, 'estoque/vacina_ajustar_quantidade.html', {'form': form, 'vacina': vacina})
+
+def reservar_remedio(request):
+    if request.method == 'POST':
+        form = ReservaForm(request.POST)
+        if form.is_valid():
+            reserva = form.save(commit=False)
+            remedio = reserva.remedio
+            if remedio.quantidade >= reserva.quantidade:
+                remedio.quantidade -= reserva.quantidade
+                remedio.save()
+                reserva.save()
+                return redirect('estoque:reserva_confirmada')
+            else:
+                form.add_error('quantidade', 'Quantidade insuficiente em estoque.')
+    else:
+        form = ReservaForm()
+
+    return render(request, 'estoque/reservar_remedio.html', {'form': form})
+
+def reserva_confirmada(request):
+    return render(request, 'estoque/reserva_confirmada.html')

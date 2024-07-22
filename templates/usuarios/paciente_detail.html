@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h1>{{ object.nome_completo }}</h1>
+    <p><strong>Rua:</strong> {{ object.rua }}</p>
+    <p><strong>Bairro:</strong> {{ object.bairro }}</p>
+    <p><strong>Numero:</strong> {{ object.numero }}</p>
+    <p><strong>Cidade:</strong> {{ object.cidade }}</p>
+    <p><strong>UF:</strong> {{ object.uf }}</p>
+    <p><strong>CPF:</strong> {{ object.cpf }}</p>
+    <p><strong>RG:</strong> {{ object.rg }}</p>
+    <p><strong>Nome da Mãe:</strong> {{ object.nome_mae }}</p>
+    <p><strong>Nome do Pai:</strong> {{ object.nome_pai }}</p>
+    <p><strong>Cartão SUS:</strong> {{ object.num_cartao_sus }}</p>
+    <a href="{% url 'usuarios:paciente_update' object.pk %}">Editar</a>
+    <a href="{% url 'usuarios:paciente_delete' object.pk %}">Deletar</a>
+    <a href="{% url 'usuarios:paciente_list' %}">Voltar à lista</a>
+{% endblock %}

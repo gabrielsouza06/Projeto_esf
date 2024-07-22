@@ -19,10 +19,10 @@
                 <td>{{ vacina.descricao }}</td>
                 <td>{{ vacina.quantidade }}</td>
                 <td>
-                    <a href="{% url 'vacina_update' vacina.pk %}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="{% url 'estoque:vacina_update' vacina.pk %}" class="btn btn-primary btn-sm">Editar</a>
                     
-                    <a href="{% url 'ajustar_quantidade_vacina' vacina.pk %}" class="btn btn-primary btn-sm">Ajustar Quantidade</a>
-                    <a href="{% url 'vacina_delete' vacina.pk %}" class="btn btn-danger btn-sm">Deletar</a>
+                    <a href="{% url 'estoque:ajustar_quantidade_vacina' vacina.pk %}" class="btn btn-primary btn-sm">Ajustar Quantidade</a>
+                    <a href="{% url 'estoque:vacina_delete' vacina.pk %}" class="btn btn-danger btn-sm">Deletar</a>
                 </td>
             </tr>
             {% endfor %}
@@ -30,6 +30,6 @@
     </table>
     <a class="btn btn-success" href="{% url 'login:user_page' %}">Voltar para a Página de Usuário</a>
     <br><br>
-    <a href="{% url 'vacina_create' %}" class="btn btn-success">Adicionar Vacina</a>
+    <a href="{% url 'estoque:vacina_create' %}" class="btn btn-success">Adicionar Vacina</a>
 </div>
 {% endblock %}

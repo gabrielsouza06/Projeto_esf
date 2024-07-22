@@ -18,11 +18,11 @@
             <td>{{ remedio.descricao }}</td>
             <td>{{ remedio.quantidade }}</td>
             <td>
-                <a class="btn btn-primary btn-sm" href="{% url 'remedio_update' remedio.pk %}">Editar</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'estoque:remedio_update' remedio.pk %}">Editar</a>
                 <br><br>
-                <a class="btn btn-danger btn-sm" href="{% url 'remedio_delete' remedio.pk %}">Deletar</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'estoque:remedio_delete' remedio.pk %}">Deletar</a>
                 <br><br>
-                <a class="btn btn-primary btn-sm" href="{% url 'ajustar_quantidade' remedio.pk %}">Ajustar Quantidade</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'estoque:ajustar_quantidade' remedio.pk %}">Ajustar Quantidade</a>
             </td>
         </tr>
         {% endfor %}
@@ -30,5 +30,5 @@
 </table>
 <a class="btn btn-success" href="{% url 'login:user_page' %}">Voltar para a Página de Usuário</a>
 <br><br>
-<a class="btn btn-primary" href="{% url 'remedio_create' %}">Adicionar Remédio</a>
+<a class="btn btn-primary" href="{% url 'estoque:remedio_create' %}">Adicionar Remédio</a>
 {% endblock %}

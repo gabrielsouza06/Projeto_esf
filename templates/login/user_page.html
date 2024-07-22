@@ -7,11 +7,15 @@
 </head>
 <body>
     <h1>Bem-vindo!</h1>
-    <a href="{% url 'usuarios:lista_pessoas' %}">Listagem de Usuários</a>
+    <a href="{% url 'usuarios:paciente_list' %}">Listagem de Paciente</a>
     <br><br>
-    <a href="{% url 'vacina_list' %}">Lista de Vacinas</a>
+    <a href="{% url 'usuarios:profissional_list' %}">Listagem de Profissionais</a>
     <br><br>
-    <a href="{% url 'remedio_list' %}">Lista de Remédios</a>
+    <a href="{% url 'estoque:vacina_list' %}">Lista de Vacinas</a>
+    <br><br>
+    <a href="{% url 'estoque:remedio_list' %}">Lista de Remédios</a>
+    <br><br>
+    <a href="{% url 'estoque:reservar_remedio' %}">Reservar Remédios</a>
     <br><br>
     <form id="logout-form" method="post" action="{% url 'logout' %}">
         {% csrf_token %}

@@ -1,0 +1,11 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <h1>{% if form.instance.pk %}Editar Profissional{% else %}Adicionar Profissional{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="{% url 'usuarios:profissional_list' %}">Cancelar</a>
+{% endblock %}
