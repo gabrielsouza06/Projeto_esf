@@ -1,0 +1,27 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Lista de Consultas</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>Profissional</th>
+                    <th>Data da Consulta</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for consulta in consultas %}
+                <tr>
+                    <td>{{ consulta.paciente }}</td>
+                    <td>{{ consulta.profissional }}</td>
+                    <td>{{ consulta.data_consulta }}</td>
+                    <td>{{ consulta.observacoes }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

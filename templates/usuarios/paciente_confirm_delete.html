@@ -1,11 +1,10 @@
 {% extends '_base.html' %}
-
 {% block content %}
-    <h1>Confirmar Deleção</h1>
-    <p>Tem certeza que deseja deletar o paciente "{{ object.nome_completo }}"?</p>
+    <h2>Confirmar Exclusão</h2>
+    <p>Tem certeza de que deseja excluir "{{ object.nome_completo }}"?</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Sim, deletar</button>
+        <button type="submit">Confirmar</button>
     </form>
-    <a href="{% url 'usuarios:paciente_detail' object.pk %}">Cancelar</a>
+    <a href="{% url 'paciente_detail' object.pk %}">Cancelar</a>
 {% endblock %}

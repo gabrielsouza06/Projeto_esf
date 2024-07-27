@@ -1,13 +1,11 @@
 {% extends '_base.html' %}
 
 {% block content %}
-    <h1>Lista de Pacientes</h1>
+    <h2>Lista de Pacientes</h2>
     <ul>
         {% for paciente in object_list %}
-        <li><a href="{% url 'usuarios:paciente_detail' paciente.pk %}">{{ paciente.nome_completo }}</a></li>
+        <li><a href="{% url 'paciente_detail' paciente.pk %}">{{ paciente.nome_completo }}</a></li>
         {% endfor %}
     </ul>
-    <a href="{% url 'usuarios:paciente_create' %}">Adicionar Novo Paciente</a>
-    <br><br>
-    <a href="{% url 'login:user_page' %}">Retornar a pagina de Usuario</a>
+    <a href="{% url 'paciente_create' %}">Adicionar Novo Paciente</a>
 {% endblock %}

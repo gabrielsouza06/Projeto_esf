@@ -1,8 +1,0 @@
-{% extends '_base.html' %}
-
-{% block content %}
-<h2>Reserva Confirmada</h2>
-<p>Sua reserva foi realizada com sucesso.</p>
-<a href="{% url 'estoque:reservar_remedio' %}">Fazer outra reserva</a>
-<a href="{% url 'login:user_page' %}">Retornar a pagina de usuarios</a>
-{% endblock %}
