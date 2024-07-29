@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'consultas',
 ]
 
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -130,3 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+
+
+LOGIN_REDIRECT_URL = 'esf_home'  # Redireciona para a URL nomeada 'home' após o login
+LOGOUT_REDIRECT_URL = 'login'  # Redireciona para a URL nomeada 'login' após o logout
