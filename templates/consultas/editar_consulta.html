@@ -1,0 +1,45 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Editar Consulta</h1>
+    <form method="post" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.data_hora.label_tag }}
+            {{ form.data_hora }}
+            <div class="invalid-feedback">
+                Por favor, insira uma data e hora válidas.
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.status.label_tag }}
+            {{ form.status }}
+            <div class="invalid-feedback">
+                Por favor, insira o status.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'listar_consultas' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+<script>
+    // Bootstrap custom validation styles
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock %}

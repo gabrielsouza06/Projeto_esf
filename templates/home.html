@@ -7,6 +7,8 @@
     <title>ESF - Estratégia de Saúde da Família</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Custom CSS (se necessário) -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
@@ -40,16 +42,54 @@
     <main class="container my-5">
         <section>
             <h2>Sobre a ESF</h2>
-            <p>A Unidade de Estratégia de Saúde da Família (ESF) visa promover a saúde e o bem-estar da comunidade com um atendimento integral e humanizado.</p>
+            <p>A Unidade de Estratégia de Saúde da Família (ESF) visa promover a saúde e o bem-estar da comunidade com um atendimento integral e humanizado. Nossa equipe está sempre pronta para atender você e sua família, proporcionando cuidados de qualidade e serviços essenciais para a saúde.</p>
         </section>
         <section class="mt-4">
             <h2>Serviços Oferecidos</h2>
-            <ul class="list-unstyled">
-                <li><i class="fas fa-check-circle"></i> Atendimento Médico Geral</li>
-                <li><i class="fas fa-check-circle"></i> Consultas de Enfermagem</li>
-                <li><i class="fas fa-check-circle"></i> Programas de Vacinação</li>
-                <li><i class="fas fa-check-circle"></i> Orientações sobre Saúde e Prevenção</li>
-            </ul>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-stethoscope"></i> Atendimento Médico Geral</li>
+                        <li><i class="fas fa-user-nurse"></i> Consultas de Enfermagem</li>
+                        <li><i class="fas fa-syringe"></i> Programas de Vacinação</li>
+                        <li><i class="fas fa-heartbeat"></i> Orientações sobre Saúde e Prevenção</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-briefcase-medical"></i> Atendimento Domiciliar</li>
+                        <li><i class="fas fa-pills"></i> Distribuição de Medicamentos</li>
+                        <li><i class="fas fa-baby"></i> Assistência Pré-natal</li>
+                        <li><i class="fas fa-procedures"></i> Cuidados Pós-hospitalares</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="mt-4">
+            <h2>Notícias e Informativos</h2>
+            <div class="card-deck">
+                <div class="card">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">Campanha de Vacinação</h5>
+                        <p class="card-text">Participe da nossa campanha de vacinação e proteja sua família contra diversas doenças.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">Orientações de Prevenção</h5>
+                        <p class="card-text">Confira as últimas orientações sobre prevenção de doenças e cuidados com a saúde.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">Cuidado Integral</h5>
+                        <p class="card-text">Nosso compromisso é oferecer um cuidado integral e humanizado para toda a comunidade.</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
     <footer class="bg-dark text-white text-center py-3">
