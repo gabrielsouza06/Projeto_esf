@@ -1,82 +1,35 @@
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView, TemplateView
-from .models import Paciente, Profissional
-from .forms import PacienteForm, ProfissionalForm
-from django.shortcuts import render, redirect
-from django.contrib.auth import login as auth_login
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
+from django.shortcuts import render
+from .models import Usuario
+from .forms import UsuarioForm
 
+def index(request):
 
-class CustomLoginView(LoginView):
-    form_class = AuthenticationForm
+    usuarios = Usuario.objects.all()
 
-    def get_success_url(self):
-        if self.request.user.is_paciente:
-            return reverse_lazy('paciente_home')
-        elif self.request.user.is_profissional:
-            return reverse_lazy('profissional_home')
-        return super().get_success_url()
+    return render(request, "usuarios/listaTodos.html", {})
 
-@login_required
-def paciente_home(request):
-    return render(request, 'paciente_home.html')
+def add(request):
 
-@login_required
-def profissional_home(request):
-    return render(request, 'profissional_home.html')
+    if request.method == "POST":
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpRedirect("/usuarios/")
 
+    else:
+        form = UsuarioForm()
 
-class ESFHomeView(TemplateView):
-    template_name = 'home.html'
+    contexto = {
+        'form': form
+    }
 
-class PacienteListView(ListView):
-    model = Paciente
-    template_name = 'usuarios/paciente/paciente_list.html'
+    return render(request, "usuarios/form.html", contexto)
 
-class PacienteDetailView(DetailView):
-    model = Paciente
-    template_name = 'usuarios/paciente/paciente_detail.html'
+def detail(request, usuario_id):
+    pass
 
-class PacienteCreateView(CreateView):
-    model = Paciente
-    form_class = PacienteForm
-    template_name = 'usuarios/paciente/paciente_form.html'
-    success_url = reverse_lazy('paciente_list')
+def edit(request, usuario_id):
+    pass
 
-class PacienteUpdateView(UpdateView):
-    model = Paciente
-    form_class = PacienteForm
-    template_name = 'usuarios/paciente/paciente_form.html'
-    success_url = reverse_lazy('paciente_list')
-
-class PacienteDeleteView(DeleteView):
-    model = Paciente
-    template_name = 'usuarios/paciente/paciente_confirm_delete.html'
-    success_url = reverse_lazy('paciente_list')
-
-class ProfissionalListView(ListView):
-    model = Profissional
-    template_name = 'usuarios/profissional/profissional_list.html'
-
-class ProfissionalDetailView(DetailView):
-    model = Profissional
-    template_name = 'usuarios/profissional/profissional_detail.html'
-
-class ProfissionalCreateView(CreateView):
-    model = Profissional
-    form_class = ProfissionalForm
-    template_name = 'usuarios/profissional/profissional_form.html'
-    success_url = reverse_lazy('profissional_list')
-
-class ProfissionalUpdateView(UpdateView):
-    model = Profissional
-    form_class = ProfissionalForm
-    template_name = 'usuarios/profissional/profissional_form.html'
-    success_url = reverse_lazy('profissional_list')
-
-class ProfissionalDeleteView(DeleteView):
-    model = Profissional
-    template_name = 'usuarios/profissional/profissional_confirm_delete.html'
-    success_url = reverse_lazy('profissional_list')
+def delete(request, usuario_id):
+    pass
