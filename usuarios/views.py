@@ -1,35 +1,39 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Usuario
 from .forms import UsuarioForm
 
-def index(request):
-
+def usuario_list(request):
     usuarios = Usuario.objects.all()
+    return render(request, 'usuarios/listaTodos.html', {'usuarios': usuarios})
 
-    return render(request, "usuarios/listaTodos.html", {})
+def usuario_detail(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    return render(request, 'usuarios/usuario_detail.html', {'usuario': usuario})
 
-def add(request):
-
-    if request.method == "POST":
+def usuario_create(request):
+    if request.method == 'POST':
         form = UsuarioForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpRedirect("/usuarios/")
-
+            return redirect('usuario_list')
     else:
         form = UsuarioForm()
+    return render(request, 'usuarios/form.html', {'form': form})
 
-    contexto = {
-        'form': form
-    }
+def usuario_update(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+            return redirect('usuario_list')
+    else:
+        form = UsuarioForm(instance=usuario)
+    return render(request, 'usuarios/form.html', {'form': form})
 
-    return render(request, "usuarios/form.html", contexto)
-
-def detail(request, usuario_id):
-    pass
-
-def edit(request, usuario_id):
-    pass
-
-def delete(request, usuario_id):
-    pass
+def usuario_delete(request, pk):
+    usuario = get_object_or_404(Usuario, pk=pk)
+    if request.method == 'POST':
+        usuario.delete()
+        return redirect('usuario_list')
+    return render(request, 'usuarios/usuario_confirm_delete.html', {'usuario': usuario})

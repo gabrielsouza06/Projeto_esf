@@ -1,0 +1,37 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Detalhes do Usuário</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Nome Completo:</strong> {{ usuario.nome_completo }}</p>
+                        <p><strong>Nome de Usuário:</strong> {{ usuario.username }}</p>
+                        <p><strong>Email:</strong> {{ usuario.email }}</p>
+                        <p><strong>Primeiro Nome:</strong> {{ usuario.first_name }}</p>
+                        <p><strong>Último Nome:</strong> {{ usuario.last_name }}</p>
+                        <p><strong>Data de Nascimento:</strong> {{ usuario.data_nascimento }}</p>
+                        <p><strong>Rua:</strong> {{ usuario.rua }}</p>
+                        <p><strong>Número da Casa:</strong> {{ usuario.num_casa }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>UF:</strong> {{ usuario.uf }}</p>
+                        <p><strong>CPF:</strong> {{ usuario.cpf }}</p>
+                        <p><strong>RG:</strong> {{ usuario.rg }}</p>
+                        <p><strong>Nome da Mãe:</strong> {{ usuario.nome_mae }}</p>
+                        <p><strong>Nome do Pai:</strong> {{ usuario.nome_pai }}</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <a href="{% url 'usuario_update' usuario.pk %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'usuario_delete' usuario.pk %}" class="btn btn-danger">Deletar</a>
+                    <a href="{% url 'usuario_list' %}" class="btn btn-secondary">Voltar para a Lista</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
