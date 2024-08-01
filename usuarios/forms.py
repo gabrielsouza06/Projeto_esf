@@ -32,16 +32,15 @@ UF_CHOICES = [
     ('TO', 'Tocantins'),
 ]
 
-class UsuarioForm(forms.ModelForm):
+class UsuarioForm(UserCreationForm):
     class Meta:
         model = Usuario
         fields = [
-            'username', 'password', 'email',
+            'username', 'email',
             'nome_completo', 'data_nascimento', 'rua', 'num_casa', 'uf',
-            'cpf', 'rg', 'nome_mae', 'nome_pai'
+            'cpf', 'rg', 'nome_mae', 'nome_pai', 'password1'
         ]
         widgets = {
-            'password': forms.PasswordInput(),
             'uf': forms.Select(choices=UF_CHOICES),
         }
 
