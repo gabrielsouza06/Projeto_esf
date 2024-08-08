@@ -1,6 +1,6 @@
 from django import forms
-from .models import Paciente, Profissional, Usuario
 from django.contrib.auth.forms import UserCreationForm
+from .models import Usuario
 
 UF_CHOICES = [
     ('AC', 'Acre'),
@@ -43,14 +43,3 @@ class UsuarioForm(UserCreationForm):
         widgets = {
             'uf': forms.Select(choices=UF_CHOICES),
         }
-
-
-class PacienteForm(forms.ModelForm):
-    class Meta:
-        model = Paciente
-        fields = ['username', 'password', 'nome_completo', 'data_nascimento', 'rua', 'num_casa', 'uf', 'cpf', 'rg', 'nome_mae', 'nome_pai', 'num_cartao_sus']
-
-class ProfissionalForm(forms.ModelForm):
-    class Meta:
-        model = Profissional
-        fields = ['username', 'password', 'nome_completo', 'data_nascimento', 'rua', 'num_casa', 'uf', 'cpf', 'rg', 'nome_mae', 'nome_pai', 'num_conselho']

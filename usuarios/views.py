@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Usuario
 from .forms import UsuarioForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+
+def home(request):
+    return render(request, 'home.html')
 
 @login_required
 def usuario_list(request):
@@ -43,3 +47,15 @@ def usuario_delete(request, pk):
         usuario.delete()
         return redirect('usuario_list')
     return render(request, 'usuarios/usuario_confirm_delete.html', {'usuario': usuario})
+
+def register(request):
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Conta criada para {username}!')
+            return redirect('login')  # Redirecione para a página de login após o registro
+    else:
+        form = UsuarioForm()
+    return render(request, 'usuarios/register.html', {'form': form})

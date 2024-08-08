@@ -1,0 +1,17 @@
+{% extends '_baselogin.html' %}
+
+{% block title %}Registrar Conta{% endblock %}
+
+{% block header %}Crie sua Conta!{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Registrar" class="btn btn-primary btn-block"/>
+</form>
+{% endblock %}
+
+{% block extra_links %}
+<a class="small" href="{% url 'login' %}">Já tem uma conta? Faça login!</a>
+{% endblock %}

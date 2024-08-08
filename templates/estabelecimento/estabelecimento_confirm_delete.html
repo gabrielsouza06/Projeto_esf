@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">Deletar Estabelecimento</h1>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-danger">Confirmação de Deleção</h6>
+        </div>
+        <div class="card-body">
+            <p>Você tem certeza que deseja deletar "{{ estabelecimento.nome }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Confirmar</button>
+                <a href="{% url 'estabelecimento_list' %}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

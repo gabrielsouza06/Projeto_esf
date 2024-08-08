@@ -17,12 +17,7 @@ class Usuario(User):
 
 class Profissional(Usuario):
     num_conselho = models.CharField(max_length=50)
-    class Meta:
-        verbose_name = 'Profissional'
-        verbose_name_plural = 'Profissionais'
+
 
 class Paciente(Usuario):
     num_cartao_sus = models.CharField(max_length=15, unique=True)
-    class Meta:
-        verbose_name = 'Paciente'
-        verbose_name_plural = 'Pacientes'

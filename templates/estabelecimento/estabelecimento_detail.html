@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <h1 class="h3 mb-4 text-gray-800">{{ estabelecimento.nome }}</h1>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Detalhes do Estabelecimento</h6>
+        </div>
+        <div class="card-body">
+            <p><strong>Endereço:</strong> {{ estabelecimento.endereco }}</p>
+            <p><strong>Telefone:</strong> {{ estabelecimento.telefone }}</p>
+            <p><strong>Responsável:</strong> {{ estabelecimento.responsavel }}</p>
+            <a href="{% url 'estabelecimento_update' estabelecimento.pk %}" class="btn btn-warning">Editar</a>
+            <a href="{% url 'estabelecimento_delete' estabelecimento.pk %}" class="btn btn-danger">Deletar</a>
+            <a href="{% url 'estabelecimento_list' %}" class="btn btn-secondary">Voltar à Lista</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
