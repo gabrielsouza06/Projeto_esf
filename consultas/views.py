@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ConsultaForm
 from .models import Consulta
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def agendar_consulta(request):
     if request.method == 'POST':
         form = ConsultaForm(request.POST)
@@ -17,6 +19,7 @@ def listar_consultas(request):
     consultas = Consulta.objects.all()
     return render(request, 'consultas/listar_consultas.html', {'consultas': consultas})
 
+@login_required
 def editar_consulta(request, pk):
     consulta = get_object_or_404(Consulta, pk=pk)
     if request.method == 'POST':
@@ -29,6 +32,7 @@ def editar_consulta(request, pk):
     
     return render(request, 'consultas/editar_consulta.html', {'form': form})
 
+@login_required
 def excluir_consulta(request, pk):
     consulta = get_object_or_404(Consulta, pk=pk)
     if request.method == 'POST':
