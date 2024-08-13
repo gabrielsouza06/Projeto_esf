@@ -3,12 +3,38 @@ from .forms import ConsultaForm
 from .models import Consulta
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def agendar_consulta(request):
     if request.method == 'POST':
         form = ConsultaForm(request.POST)
         if form.is_valid():
-            form.save()
+            consulta = form.save(commit=False)
+
+            # Obtém o usuário autenticado
+            usuario = request.user
+            
+            # Verifica o grupo do usuário e armazena no campo apropriado
+            if usuario.groups.filter(name='Paciente').exists():
+                consulta.paciente = usuario
+            elif usuario.groups.filter(name='Profissional').exists():
+                consulta.profissional = usuario
+            else:
+                # Lida com o caso em que o usuário não está em nenhum dos grupos
+                form.add_error(None, 'Usuário não pertence a nenhum grupo válido.')
+                return render(request, 'consultas/agendar_consulta.html', {'form': form})
+
+            consulta.save()
+
+            # Cria o Prontuario com base na consulta agendada
+            Prontuario.objects.create(
+                paciente=consulta.paciente,
+                profissional=consulta.profissional,
+                estabelecimento=consulta.estabelecimento,
+                data_hora=consulta.data_hora,
+                status=consulta.status,
+            )
+
             return redirect('listar_consultas')
     else:
         form = ConsultaForm()
