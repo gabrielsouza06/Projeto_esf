@@ -1,0 +1,41 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Lista de Pacientes</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <a href="{% url 'paciente_create' %}" class="btn btn-primary">Adicionar Novo Paciente</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome Completo</th>
+                                <th>Email</th>
+                                <th>Número do Cartão SUS</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for paciente in pacientes %}
+                            <tr>
+                                <td><a href="{% url 'paciente_detail' paciente.pk %}">{{ paciente.nome_completo }}</a></td>
+                                <td>{{ paciente.email }}</td>
+                                <td>{{ paciente.num_cartao_sus }}</td>
+                                <td>
+                                    <a href="{% url 'paciente_update' paciente.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                                    <a href="{% url 'paciente_delete' paciente.pk %}" class="btn btn-danger btn-sm">Deletar</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<h1>{{ consulta }}</h1>
+<p>Data/Hora: {{ consulta.data_hora }}</p>
+<p>Status: {{ consulta.status }}</p>
+<p>Profissional: {{ consulta.profissional }}</p>
+<p>Paciente: {{ consulta.paciente }}</p>
+<p>Estabelecimento: {{ consulta.estabelecimento }}</p>
+<p>Prontuário: {% if consulta.prontuario %}{{ consulta.prontuario }}{% else %}Nenhum{% endif %}</p>
+<a href="{% url 'consulta_update' consulta.pk %}">Editar</a>
+<a href="{% url 'consulta_delete' consulta.pk %}">Excluir</a>
+<a href="{% url 'consulta_list' %}">Voltar</a>
+{% endblock %}

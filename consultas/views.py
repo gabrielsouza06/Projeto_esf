@@ -1,67 +1,79 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ConsultaForm
-from .models import Consulta
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
+from .models import Prontuario, Consulta
+from .forms import ProntuarioForm, ConsultaForm
 
 
-@login_required
-def agendar_consulta(request):
-    if request.method == 'POST':
+def prontuario_list(request):
+    prontuarios = Prontuario.objects.all()
+    return render(request, 'prontuario_list.html', {'prontuarios': prontuarios})
+
+def prontuario_detail(request, pk):
+    prontuario = get_object_or_404(Prontuario, pk=pk)
+    return render(request, 'prontuario_detail.html', {'prontuario': prontuario})
+
+def prontuario_create(request):
+    if request.method == "POST":
+        form = ProntuarioForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('prontuario_list')
+    else:
+        form = ProntuarioForm()
+    return render(request, 'prontuario_form.html', {'form': form})
+
+def prontuario_update(request, pk):
+    prontuario = get_object_or_404(Prontuario, pk=pk)
+    if request.method == "POST":
+        form = ProntuarioForm(request.POST, instance=prontuario)
+        if form.is_valid():
+            form.save()
+            return redirect('prontuario_list')
+    else:
+        form = ProntuarioForm(instance=prontuario)
+    return render(request, 'prontuario_form.html', {'form': form})
+
+def prontuario_delete(request, pk):
+    prontuario = get_object_or_404(Prontuario, pk=pk)
+    if request.method == "POST":
+        prontuario.delete()
+        return redirect('prontuario_list')
+    return render(request, 'prontuario_confirm_delete.html', {'prontuario': prontuario})
+
+# Views para Consulta
+
+def consulta_list(request):
+    consultas = Consulta.objects.all()
+    return render(request, 'consultas/consulta_list.html', {'consultas': consultas})
+
+def consulta_detail(request, pk):
+    consulta = get_object_or_404(Consulta, pk=pk)
+    return render(request, 'consultas/consulta_detail.html', {'consulta': consulta})
+
+def consulta_create(request):
+    if request.method == "POST":
         form = ConsultaForm(request.POST)
         if form.is_valid():
-            consulta = form.save(commit=False)
-
-            # Obtém o usuário autenticado
-            usuario = request.user
-            
-            # Verifica o grupo do usuário e armazena no campo apropriado
-            if usuario.groups.filter(name='Paciente').exists():
-                consulta.paciente = usuario
-            elif usuario.groups.filter(name='Profissional').exists():
-                consulta.profissional = usuario
-            else:
-                # Lida com o caso em que o usuário não está em nenhum dos grupos
-                form.add_error(None, 'Usuário não pertence a nenhum grupo válido.')
-                return render(request, 'consultas/agendar_consulta.html', {'form': form})
-
-            consulta.save()
-
-            # Cria o Prontuario com base na consulta agendada
-            Prontuario.objects.create(
-                paciente=consulta.paciente,
-                profissional=consulta.profissional,
-                estabelecimento=consulta.estabelecimento,
-                data_hora=consulta.data_hora,
-                status=consulta.status,
-            )
-
-            return redirect('listar_consultas')
+            form.save()
+            return redirect('consulta_list')
     else:
         form = ConsultaForm()
-    
-    return render(request, 'consultas/agendar_consulta.html', {'form': form})
+    return render(request, 'consultas/consulta_form.html', {'form': form})
 
-def listar_consultas(request):
-    consultas = Consulta.objects.all()
-    return render(request, 'consultas/listar_consultas.html', {'consultas': consultas})
-
-@login_required
-def editar_consulta(request, pk):
+def consulta_update(request, pk):
     consulta = get_object_or_404(Consulta, pk=pk)
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ConsultaForm(request.POST, instance=consulta)
         if form.is_valid():
             form.save()
-            return redirect('listar_consultas')
+            return redirect('consulta_list')
     else:
         form = ConsultaForm(instance=consulta)
-    
-    return render(request, 'consultas/editar_consulta.html', {'form': form})
+    return render(request, 'consultas/consulta_form.html', {'form': form})
 
-@login_required
-def excluir_consulta(request, pk):
+def consulta_delete(request, pk):
     consulta = get_object_or_404(Consulta, pk=pk)
-    if request.method == 'POST':
+    if request.method == "POST":
         consulta.delete()
-        return redirect('listar_consultas')
-    return render(request, 'consultas/excluir_consulta.html', {'consulta': consulta})
+        return redirect('consulta_list')
+    return render(request, 'consultas/consulta_confirm_delete.html', {'consulta': consulta})

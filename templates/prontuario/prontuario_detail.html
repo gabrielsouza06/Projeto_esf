@@ -1,0 +1,10 @@
+{% extends '_base.html' %}
+
+{% block content %}
+<h1>{{ prontuario }}</h1>
+<p>Data/Hora: {{ prontuario.data_hora }}</p>
+<p>Status: {{ prontuario.status }}</p>
+<a href="{% url 'prontuario_update' prontuario.pk %}">Editar</a>
+<a href="{% url 'prontuario_delete' prontuario.pk %}">Excluir</a>
+<a href="{% url 'prontuario_list' %}">Voltar</a>
+{% endblock %}

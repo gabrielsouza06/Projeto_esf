@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Detalhes do Profissional</h6>
+            </div>
+            <div class="card-body">
+                <p><strong>Nome Completo:</strong> {{ profissional.nome_completo }}</p>
+                <p><strong>Email:</strong> {{ profissional.email }}</p>
+                <p><strong>Data de Nascimento:</strong> {{ profissional.data_nascimento }}</p>
+                <p><strong>Endereço:</strong> {{ profissional.rua }}, {{ profissional.num_casa }}, {{ profissional.uf }}</p>
+                <p><strong>CPF:</strong> {{ profissional.cpf }}</p>
+                <p><strong>RG:</strong> {{ profissional.rg }}</p>
+                <p><strong>Nome da Mãe:</strong> {{ profissional.nome_mae }}</p>
+                <p><strong>Nome do Pai:</strong> {{ profissional.nome_pai|default:"Não informado" }}</p>
+                <p><strong>Número do Conselho:</strong> {{ profissional.num_conselho }}</p>
+                <a href="{% url 'profissional_update' profissional.pk %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'profissional_delete' profissional.pk %}" class="btn btn-danger">Deletar</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

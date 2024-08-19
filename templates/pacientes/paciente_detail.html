@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Detalhes do Paciente</h6>
+            </div>
+            <div class="card-body">
+                <p><strong>Nome Completo:</strong> {{ paciente.nome_completo }}</p>
+                <p><strong>Email:</strong> {{ paciente.email }}</p>
+                <p><strong>Data de Nascimento:</strong> {{ paciente.data_nascimento }}</p>
+                <p><strong>Endereço:</strong> {{ paciente.rua }}, {{ paciente.num_casa }}, {{ paciente.uf }}</p>
+                <p><strong>CPF:</strong> {{ paciente.cpf }}</p>
+                <p><strong>RG:</strong> {{ paciente.rg }}</p>
+                <p><strong>Nome da Mãe:</strong> {{ paciente.nome_mae }}</p>
+                <p><strong>Nome do Pai:</strong> {{ paciente.nome_pai|default:"Não informado" }}</p>
+                <p><strong>Número do Cartão SUS:</strong> {{ paciente.num_cartao_sus }}</p>
+                <a href="{% url 'paciente_update' paciente.pk %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'paciente_delete' paciente.pk %}" class="btn btn-danger">Deletar</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

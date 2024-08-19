@@ -1,0 +1,41 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Lista de Profissionais</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <a href="{% url 'profissional_create' %}" class="btn btn-primary">Adicionar Novo Profissional</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome Completo</th>
+                                <th>Email</th>
+                                <th>Número do Conselho</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for profissional in profissionais %}
+                            <tr>
+                                <td><a href="{% url 'profissional_detail' profissional.pk %}">{{ profissional.nome_completo }}</a></td>
+                                <td>{{ profissional.email }}</td>
+                                <td>{{ profissional.num_conselho }}</td>
+                                <td>
+                                    <a href="{% url 'profissional_update' profissional.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                                    <a href="{% url 'profissional_delete' profissional.pk %}" class="btn btn-danger btn-sm">Deletar</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
