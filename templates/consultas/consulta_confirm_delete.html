@@ -1,11 +1,35 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<h1>Excluir Consulta</h1>
-<p>Tem certeza que deseja excluir "{{ consulta }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Confirmar</button>
-</form>
-<a href="{% url 'consulta_list' %}">Cancelar</a>
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Excluir Consulta</h1>
+    </div>
+
+    <!-- Excluir Consulta Card -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-danger">Tem certeza que deseja excluir "{{ consulta }}"?</h6>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Confirmar
+                    </button>
+                    <a href="{% url 'consulta_list' %}" class="btn btn-secondary">
+                        <i class="fas fa-times"></i> Cancelar
+                    </a>
+                    <a href="{% url 'prontuario_create' %}" class="btn btn-primary">
+                        <i class="fas fa-file-medical"></i> Novo Prontuário
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
 {% endblock %}

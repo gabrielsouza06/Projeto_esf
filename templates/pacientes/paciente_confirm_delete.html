@@ -1,0 +1,19 @@
+{% extends '_base.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-danger">Confirmar Exclusão</h6>
+            </div>
+            <div class="card-body">
+                <p class="mb-4">Tem certeza que deseja deletar <strong>"{{ Paciente.nome_completo }}"</strong>?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                    <a href="{% url 'usuario_list' %}" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

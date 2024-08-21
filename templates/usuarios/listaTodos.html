@@ -2,16 +2,25 @@
 
 {% block content %}
     <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Lista de Usuários</h1>
+        </div>
+
+        <!-- Card for User List -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Lista de Usuários</h6>
+            <div class="card-header py-3 d-flex justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Gerenciamento de Usuários</h6>
+                <div>
+                    <a href="{% url 'usuario_create' %}" class="btn btn-primary btn-sm">Adicionar Novo Usuário</a>
+                    <a href="{% url 'profissional_list' %}" class="btn btn-primary btn-sm">Listagen de Profissionais</a>
+                    <a href="{% url 'paciente_list' %}" class="btn btn-primary btn-sm">Listagen de Paciente</a>
+                    <a href="{% url 'estabelecimento_list' %}" class="btn btn-info btn-sm">Ver Estabelecimentos</a>
+                </div>
             </div>
             <div class="card-body">
-                <div class="mb-3">
-                    <a href="{% url 'usuario_create' %}" class="btn btn-primary">Adicionar Novo Usuário</a>
-                </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Nome Completo</th>

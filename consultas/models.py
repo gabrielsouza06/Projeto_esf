@@ -3,7 +3,7 @@ from usuarios.models import Usuario
 from estabelecimento.models import Estabelecimento
 
 class Prontuario(models.Model):
-    paciente = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='prontuarios_paciente')
+    paciente = models.OneToOneField(Usuario, on_delete=models.CASCADE, related_name='prontuario_paciente')
     profissional = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='prontuarios_profissional')
     estabelecimento = models.ForeignKey(Estabelecimento, on_delete=models.CASCADE, related_name='prontuarios_estabelecimento')
     data_hora = models.DateTimeField()
@@ -11,7 +11,6 @@ class Prontuario(models.Model):
 
     def __str__(self):
         return f"Prontuario de {self.paciente} - {self.data_hora}"
-
 
 class Consulta(models.Model):
     data_hora = models.DateTimeField()
